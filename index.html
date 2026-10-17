@@ -257,30 +257,34 @@
   </div>
 </footer>
 
-<script src="assets/js/main.js"></script>
-  <script>
+<script>
 (function () {
-  var who = document.querySelector('.who');
-  if (!who) return;
-
   // Skip the animation for people who prefer reduced motion
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   // Old browsers: just show everything
   if (!('IntersectionObserver' in window)) return;
 
-  who.classList.add('who--anim');
+  var sections = [
+    { selector: '.who',            hideClass: 'who--anim' },
+    { selector: '.cues--services', hideClass: 'svc--anim' }
+  ];
 
   var observer = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
-        who.classList.add('is-visible');
-        observer.unobserve(who);
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+  }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
 
-  observer.observe(who);
+  sections.forEach(function (s) {
+    var el = document.querySelector(s.selector);
+    if (!el) return;
+    el.classList.add(s.hideClass);
+    observer.observe(el);
+  });
 })();
 </script>
 </body>
