@@ -638,3 +638,81 @@ footer.site-footer {
   0% { transform: scale(1); opacity: 0.6; }
   100% { transform: scale(6.5); opacity: 0; }
 }
+/* ==========================================================
+   Brand colour cues and hovers
+   Brand colours: green #2E7D32, blue #1565C0, gold #D4AF37
+   (--tint is the 20% tint of each colour; text stays dark on tints)
+   ========================================================== */
+
+.cues .row:nth-child(3n+1),
+.cues .strip__item:nth-child(3n+1),
+.cues .case:nth-child(3n+1) { --c: #2E7D32; --tint: #D5E5D6; --on: #FFFFFF; }
+
+.cues .row:nth-child(3n+2),
+.cues .strip__item:nth-child(3n+2),
+.cues .case:nth-child(3n+2) { --c: #1565C0; --tint: #D0E0F2; --on: #FFFFFF; }
+
+.cues .row:nth-child(3n),
+.cues .strip__item:nth-child(3n),
+.cues .case:nth-child(3n) { --c: #D4AF37; --tint: #F6EFD7; --on: #1A1A1A; }
+
+.cues .row,
+.cues .strip__item,
+.cues .case {
+  transition: background-color .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+
+/* Strategic 360 digital marketing: each service row */
+.cues .row {
+  padding-left: 16px;
+  padding-right: 16px;
+  box-shadow: inset 3px 0 0 var(--c);
+}
+.cues .row:hover {
+  background-color: var(--tint);
+  box-shadow: inset 6px 0 0 var(--c);
+}
+.cues .row:hover .row__index,
+.cues .row:hover .row__title,
+.cues .row:hover .row__desc { color: #1A1A1A; }
+
+/* Industries we know: each industry card */
+.cues .strip__item {
+  box-shadow: inset 0 4px 0 var(--c);
+}
+.cues .strip__item:hover {
+  background-color: var(--tint);
+  box-shadow: inset 0 8px 0 var(--c), 0 12px 24px rgba(0, 0, 0, .08);
+  transform: translateY(-4px);
+}
+.cues .strip__item:hover h3,
+.cues .strip__item:hover p { color: #1A1A1A; }
+
+/* Recent work: each listed brand */
+.cues .case {
+  padding: 16px 16px 16px 20px;
+  box-shadow: inset 3px 0 0 var(--c);
+}
+.cues .case:hover {
+  background-color: var(--tint);
+  box-shadow: inset 6px 0 0 var(--c);
+}
+.cues .case:hover h3,
+.cues .case:hover p { color: #1A1A1A; }
+.cues .case:hover .case__tag {
+  background-color: var(--c);
+  border-color: var(--c);
+  color: var(--on);
+}
+
+/* On wider screens, pull the service rows out so their text stays aligned with the heading */
+@media (min-width: 641px) {
+  .cues--services .row { margin-left: -16px; margin-right: -16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cues .row,
+  .cues .strip__item,
+  .cues .case { transition: none; }
+  .cues .strip__item:hover { transform: none; }
+}
