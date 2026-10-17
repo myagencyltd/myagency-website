@@ -1153,3 +1153,42 @@ footer.site-footer {
   .cues--services.is-visible h2,
   .cues--services.is-visible .row { animation: none; }
 }
+<style>
+/* Scroll animations: Who we are + What we do */
+.who--anim:not(.is-visible) .eyebrow,
+.who--anim:not(.is-visible) h2,
+.who--anim:not(.is-visible) .who__item,
+.svc--anim:not(.is-visible) .eyebrow,
+.svc--anim:not(.is-visible) h2,
+.svc--anim:not(.is-visible) .row { opacity: 0; }
+
+.who.is-visible .eyebrow,
+.cues--services.is-visible .eyebrow { animation: revFade .6s ease backwards; }
+.who.is-visible h2,
+.cues--services.is-visible h2 { animation: revFade .7s ease .08s backwards; }
+
+.who.is-visible .who__item { animation: whoIn .75s cubic-bezier(.2,.7,.2,1) backwards; }
+.who.is-visible .who__item:nth-child(1) { animation-delay: .25s; }
+.who.is-visible .who__item:nth-child(2) { animation-delay: .45s; }
+.who.is-visible .who__item:nth-child(3) { animation-delay: .65s; }
+
+.cues--services.is-visible .row { animation: svcRow .75s cubic-bezier(.2,.7,.2,1) backwards; }
+.cues--services.is-visible .row:nth-child(1) { animation-delay: .20s; }
+.cues--services.is-visible .row:nth-child(2) { animation-delay: .35s; }
+.cues--services.is-visible .row:nth-child(3) { animation-delay: .50s; }
+.cues--services.is-visible .row:nth-child(4) { animation-delay: .65s; }
+.cues--services.is-visible .row:nth-child(5) { animation-delay: .80s; }
+
+@keyframes revFade {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes whoIn {
+  from { opacity: 0; transform: translateX(-28px); clip-path: inset(0 0 100% 0); }
+  to   { opacity: 1; transform: none; clip-path: inset(0 0 0 0); }
+}
+@keyframes svcRow {
+  from { opacity: 0; transform: translateY(26px); box-shadow: inset 0 0 0 var(--c); }
+  to   { opacity: 1; transform: none; box-shadow: inset 3px 0 0 var(--c); }
+}
+</style>
