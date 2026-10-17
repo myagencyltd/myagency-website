@@ -777,3 +777,109 @@ footer.site-footer {
     row-gap: 10px;
   }
 }
+/* ==========================================================
+   Recent work: image background cards
+   (add below the existing .rw-card rules)
+   ========================================================== */
+
+.rw-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 220px;
+  align-content: end;
+  background-color: #1A1A1A;
+  border: none;
+  box-shadow: none;
+  isolation: isolate;
+}
+
+/* The image layer */
+.rw-card__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform .5s ease;
+}
+
+/* Dark overlay for readable text, plus the brand colour bar on the left */
+.rw-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--c), var(--c)) left / 6px 100% no-repeat,
+    linear-gradient(90deg, rgba(0, 0, 0, .82) 0%, rgba(0, 0, 0, .6) 55%, rgba(0, 0, 0, .35) 100%);
+  transition: background-size .25s ease;
+}
+
+/* Keep the invisible link above the image and the text above the link */
+.rw-card__link { z-index: 1; }
+.rw-card > .rw-card__tag,
+.rw-card > .rw-card__body,
+.rw-card > .rw-card__arrow {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Hover and keyboard focus */
+.rw-card:hover,
+.rw-card:focus-within {
+  background-color: #1A1A1A;
+  box-shadow: none;
+  transform: translateY(-2px);
+}
+.rw-card:hover .rw-card__bg,
+.rw-card:focus-within .rw-card__bg { transform: scale(1.06); }
+.rw-card:hover::after,
+.rw-card:focus-within::after {
+  background:
+    linear-gradient(var(--c), var(--c)) left / 12px 100% no-repeat,
+    linear-gradient(90deg, rgba(0, 0, 0, .82) 0%, rgba(0, 0, 0, .6) 55%, rgba(0, 0, 0, .35) 100%);
+}
+
+/* Text on the image */
+.rw-card__body h3,
+.rw-card__body p { color: #FFFFFF; }
+.rw-card__arrow { color: #FFFFFF; opacity: .6; }
+.rw-card:hover .rw-card__arrow,
+.rw-card:focus-within .rw-card__arrow { opacity: 1; }
+
+/* Tag: white pill with a brand-colour outline, fills with the brand colour on hover */
+.rw-card__tag {
+  background-color: #FFFFFF;
+  border: 2px solid var(--c);
+  color: #1A1A1A;
+}
+.rw-card:hover .rw-card__tag,
+.rw-card:focus-within .rw-card__tag {
+  background-color: var(--c);
+  color: var(--on);
+}
+
+@media (max-width: 640px) {
+  .rw-card { min-height: 0; padding-top: 28px; }
+  .rw-card::after {
+    background:
+      linear-gradient(var(--c), var(--c)) left / 6px 100% no-repeat,
+      linear-gradient(180deg, rgba(0, 0, 0, .7), rgba(0, 0, 0, .75));
+  }
+  .rw-card:hover::after,
+  .rw-card:focus-within::after {
+    background:
+      linear-gradient(var(--c), var(--c)) left / 10px 100% no-repeat,
+      linear-gradient(180deg, rgba(0, 0, 0, .7), rgba(0, 0, 0, .75));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rw-card__bg,
+  .rw-card::after { transition: none; }
+  .rw-card:hover .rw-card__bg,
+  .rw-card:focus-within .rw-card__bg { transform: none; }
+}
