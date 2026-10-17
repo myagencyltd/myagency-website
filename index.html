@@ -258,5 +258,30 @@
 </footer>
 
 <script src="assets/js/main.js"></script>
+  <script>
+(function () {
+  var who = document.querySelector('.who');
+  if (!who) return;
+
+  // Skip the animation for people who prefer reduced motion
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // Old browsers: just show everything
+  if (!('IntersectionObserver' in window)) return;
+
+  who.classList.add('who--anim');
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        who.classList.add('is-visible');
+        observer.unobserve(who);
+      }
+    });
+  }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+
+  observer.observe(who);
+})();
+</script>
 </body>
 </html>
