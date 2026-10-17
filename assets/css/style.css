@@ -1052,3 +1052,52 @@ footer.site-footer {
   .who__item { transition: none; }
   .who__item:hover { transform: none; }
 }
+/* ==========================================================
+   Who we are: scroll reveal animation
+   The hidden state only applies when JavaScript adds .who--anim,
+   so the content is always visible if the script doesn't run.
+   ========================================================== */
+
+.who--anim:not(.is-visible) .eyebrow,
+.who--anim:not(.is-visible) h2,
+.who--anim:not(.is-visible) .who__item {
+  opacity: 0;
+}
+
+.who.is-visible .eyebrow {
+  animation: whoFade .6s ease backwards;
+}
+.who.is-visible h2 {
+  animation: whoFade .7s ease .08s backwards;
+}
+
+.who.is-visible .who__item {
+  animation: whoIn .75s cubic-bezier(.2, .7, .2, 1) backwards;
+}
+.who.is-visible .who__item:nth-child(1) { animation-delay: .25s; }
+.who.is-visible .who__item:nth-child(2) { animation-delay: .45s; }
+.who.is-visible .who__item:nth-child(3) { animation-delay: .65s; }
+
+@keyframes whoFade {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes whoIn {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .who.is-visible .eyebrow,
+  .who.is-visible h2,
+  .who.is-visible .who__item { animation: none; }
+}
