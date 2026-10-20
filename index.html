@@ -56,12 +56,27 @@
       </div>
     </div>
     <div class="hero__art" aria-hidden="true">
-      <svg viewBox="0 0 420 360">
-        <path class="stroke stroke--1" d="M40 320 L110 220"/>
-        <path class="stroke stroke--2" d="M150 320 L250 140"/>
-        <path class="stroke stroke--3" d="M290 320 L380 60"/>
-      </svg>
-    </div>
+  <svg viewBox="0 0 420 360">
+    <!-- baseline -->
+    <line class="base" x1="20" y1="322" x2="400" y2="322"/>
+
+    <!-- bars: green, blue, gold -->
+    <rect class="bar bar--1" x="50"  y="202" width="70" height="120" rx="4"/>
+    <rect class="bar bar--2" x="150" y="142" width="70" height="180" rx="4"/>
+    <rect class="bar bar--3" x="250" y="72"  width="70" height="250" rx="4"/>
+
+    <!-- trend line and arrow -->
+    <path class="trend" d="M85 172 L185 112 L285 42 L360 11"/>
+    <path class="arrow" d="M340 10 L360 11 L347 26"/>
+    <circle class="ring" cx="360" cy="11" r="10"/>
+
+    <!-- floating dots -->
+    <circle class="dot dot--1" cx="60"  cy="80"  r="7"/>
+    <circle class="dot dot--2" cx="140" cy="40"  r="6"/>
+    <circle class="dot dot--3" cx="352" cy="150" r="9"/>
+    <circle class="dot dot--4" cx="385" cy="235" r="6"/>
+  </svg>
+</div>
   </div>
 </header>
   <section class="wrap" style="padding-bottom: var(--gap-xl);">
