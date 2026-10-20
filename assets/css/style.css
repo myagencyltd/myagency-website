@@ -1333,3 +1333,154 @@ footer.site-footer {
   .services-list .row::after,
   .services-list .row > * { transition: none; }
 }
+/* ==========================================================
+   How a project runs: brand-colour steps, hover + scroll reveal
+   ========================================================== */
+
+.process h2 {
+  max-width: 22ch;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+}
+
+.process__list {
+  list-style: none;
+  margin: 48px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* brand colours rotate: green, blue, gold, green */
+.step:nth-child(3n+1) { --c: #2E7D32; --tint: #D5E5D6; --on: #FFFFFF; }
+.step:nth-child(3n+2) { --c: #1565C0; --tint: #D0E0F2; --on: #FFFFFF; }
+.step:nth-child(3n)   { --c: #D4AF37; --tint: #F6EFD7; --on: #1A1A1A; }
+
+.step {
+  padding: 28px 24px 30px;
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  box-shadow: inset 0 4px 0 var(--c);
+  transition: background-color .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+
+.step__head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.step__num {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 2px solid var(--c);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: .95rem;
+  color: #1A1A1A;
+  transition: background-color .25s ease, color .25s ease, transform .25s ease;
+}
+
+/* line that leads on to the next step */
+.step__line {
+  flex: 1;
+  height: 2px;
+  background: var(--c);
+  opacity: .55;
+  transform-origin: left;
+}
+.step:last-child .step__line { display: none; }
+
+.step h3 {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+  color: #1A1A1A;
+}
+.step p {
+  color: var(--muted);
+  font-size: .95rem;
+  line-height: 1.6;
+}
+
+/* hover + keyboard focus */
+.step:hover,
+.step:focus-within {
+  background-color: var(--tint);
+  box-shadow: inset 0 8px 0 var(--c), 0 12px 24px rgba(0, 0, 0, .08);
+  transform: translateY(-4px);
+}
+.step:hover .step__num,
+.step:focus-within .step__num {
+  background-color: var(--c);
+  color: var(--on);
+  transform: scale(1.08);
+}
+.step:hover h3,
+.step:hover p { color: #1A1A1A; }
+
+/* tablet: 2 x 2 */
+@media (max-width: 1000px) {
+  .process__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .step:nth-child(2) .step__line { display: none; }
+}
+
+/* phones: single column, no connector lines */
+@media (max-width: 640px) {
+  .process__list { grid-template-columns: 1fr; }
+  .step__line { display: none; }
+}
+
+/* ---------- scroll reveal (only when JS adds .pr--anim) ---------- */
+.pr--anim:not(.is-visible) .eyebrow,
+.pr--anim:not(.is-visible) h2,
+.pr--anim:not(.is-visible) .step { opacity: 0; }
+
+.process.is-visible .eyebrow { animation: prFade .6s ease backwards; }
+.process.is-visible h2       { animation: prFade .7s ease .08s backwards; }
+
+.process.is-visible .step {
+  animation: prRise .75s cubic-bezier(.2, .7, .2, 1) backwards;
+}
+.process.is-visible .step:nth-child(1) { animation-delay: .20s; }
+.process.is-visible .step:nth-child(2) { animation-delay: .40s; }
+.process.is-visible .step:nth-child(3) { animation-delay: .60s; }
+.process.is-visible .step:nth-child(4) { animation-delay: .80s; }
+
+/* connector lines draw once their card has landed */
+.process.is-visible .step__line {
+  animation: prLine .7s cubic-bezier(.65, 0, .35, 1) backwards;
+}
+.process.is-visible .step:nth-child(1) .step__line { animation-delay: .70s; }
+.process.is-visible .step:nth-child(2) .step__line { animation-delay: .90s; }
+.process.is-visible .step:nth-child(3) .step__line { animation-delay: 1.10s; }
+
+@keyframes prFade {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+/* cards rise while the coloured top bar grows from nothing */
+@keyframes prRise {
+  from { opacity: 0; transform: translateY(26px); box-shadow: inset 0 0 0 var(--c); }
+  to   { opacity: 1; transform: none;              box-shadow: inset 0 4px 0 var(--c); }
+}
+@keyframes prLine {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step,
+  .step__num { transition: none; }
+  .step:hover,
+  .step:focus-within { transform: none; }
+  .process.is-visible .eyebrow,
+  .process.is-visible h2,
+  .process.is-visible .step,
+  .process.is-visible .step__line { animation: none; }
+}
