@@ -158,5 +158,24 @@
 </footer>
 
 <script src="assets/js/main.js"></script>
+  <script>
+(function () {
+  var list = document.querySelector('.services-list');
+  if (!list) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!('IntersectionObserver' in window)) return;
+
+  list.classList.add('reveal-ready');
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        list.classList.add('is-visible');
+        io.unobserve(list);
+      }
+    });
+  }, { threshold: 0.15 });
+  io.observe(list);
+})();
+</script>
 </body>
 </html>
