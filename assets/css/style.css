@@ -1484,3 +1484,136 @@ footer.site-footer {
   .process.is-visible .step,
   .process.is-visible .step__line { animation: none; }
 }
+/* ==========================================================
+   Services hero: animated 360 hub icon
+   Brand colours: green #2E7D32, blue #1565C0, gold #D4AF37
+   ========================================================== */
+
+.services-art {
+  position: relative;
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.services-art svg {
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+  overflow: visible;
+}
+
+/* orbit ring: slow rotation */
+.services-art .orbit {
+  fill: none;
+  stroke: #B9C4B9;
+  stroke-width: 2;
+  stroke-dasharray: 4 12;
+  stroke-linecap: round;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: svcOrbit 50s linear infinite;
+}
+@keyframes svcOrbit { to { transform: rotate(360deg); } }
+
+/* spokes draw outward from the hub */
+.services-art .spoke {
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 140;
+  stroke-dashoffset: 140;
+  opacity: .55;
+  animation: svcSpoke .7s cubic-bezier(.65, .05, .2, 1) forwards;
+}
+.services-art .spoke--1 { stroke: #2E7D32; animation-delay: .5s; }
+.services-art .spoke--2 { stroke: #1565C0; animation-delay: .65s; }
+.services-art .spoke--3 { stroke: #D4AF37; animation-delay: .8s; }
+.services-art .spoke--4 { stroke: #2E7D32; animation-delay: .95s; }
+.services-art .spoke--5 { stroke: #1565C0; animation-delay: 1.1s; }
+@keyframes svcSpoke { to { stroke-dashoffset: 0; } }
+
+/* hub */
+.services-art .hub {
+  fill: #2E7D32;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: svcPop .6s cubic-bezier(.34, 1.56, .64, 1) .1s backwards;
+}
+.services-art .hub__text {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 30px;
+  fill: #fff;
+  letter-spacing: -.02em;
+  animation: svcFade .5s ease .5s backwards;
+}
+.services-art .pulse {
+  fill: none;
+  stroke: #2E7D32;
+  stroke-width: 2;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: svcPulse 3s ease-out infinite;
+}
+.services-art .pulse--1 { animation-delay: 1.8s; }
+.services-art .pulse--2 { animation-delay: 3.3s; stroke: #D4AF37; }
+@keyframes svcPulse {
+  0%   { transform: scale(1);   opacity: .55; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* service nodes: pop in, then float */
+.services-art .node {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation:
+    svcPop .55s cubic-bezier(.34, 1.56, .64, 1) forwards,
+    svcBob 5s ease-in-out infinite;
+}
+.services-art .node--1 { animation-delay: 1.0s, 1.6s; }
+.services-art .node--2 { animation-delay: 1.2s, 1.8s; animation-duration: .55s, 6s; }
+.services-art .node--3 { animation-delay: 1.4s, 2.0s; animation-duration: .55s, 5.5s; }
+.services-art .node--4 { animation-delay: 1.6s, 2.2s; animation-duration: .55s, 6.5s; }
+.services-art .node--5 { animation-delay: 1.8s, 2.4s; animation-duration: .55s, 5.2s; }
+
+.services-art .node__bg {
+  fill: #fff;
+  stroke-width: 3.5;
+}
+.services-art .glyph {
+  fill: none;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.services-art .glyph-fill { stroke: none; }
+
+/* brand colour per node: green, blue, gold, green, blue */
+.services-art .node--1 .node__bg, .services-art .node--1 .glyph { stroke: #2E7D32; }
+.services-art .node--1 .glyph-fill { fill: #2E7D32; }
+.services-art .node--2 .node__bg, .services-art .node--2 .glyph { stroke: #1565C0; }
+.services-art .node--3 .node__bg, .services-art .node--3 .glyph { stroke: #D4AF37; }
+.services-art .node--4 .node__bg, .services-art .node--4 .glyph { stroke: #2E7D32; }
+.services-art .node--5 .node__bg, .services-art .node--5 .glyph { stroke: #1565C0; }
+
+@keyframes svcPop {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+@keyframes svcBob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-7px); }
+}
+@keyframes svcFade { from { opacity: 0; } to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .services-art .orbit,
+  .services-art .pulse { animation: none; }
+  .services-art .pulse { opacity: 0; }
+  .services-art .spoke { animation: none; stroke-dashoffset: 0; }
+  .services-art .node { animation: none; opacity: 1; }
+  .services-art .hub,
+  .services-art .hub__text { animation: none; }
+}
