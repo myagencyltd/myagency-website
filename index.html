@@ -298,5 +298,50 @@
   });
 })();
 </script>
+  <script>
+(function () {
+  var nav = document.querySelector('.nav');
+  var toggle = document.querySelector('.nav__toggle');
+  var menu = document.querySelector('.mobile-menu');
+  if (!toggle || !menu) return;
+
+  function setOpen(open) {
+    menu.classList.toggle('is-open', open);
+    toggle.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', open);
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  /* capture phase: this handler runs first and stops any older
+     menu code from toggling a second time and cancelling it */
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('.nav__toggle')) {
+      e.stopPropagation();
+      setOpen(!menu.classList.contains('is-open'));
+    } else if (e.target.closest('.mobile-menu__close')) {
+      e.stopPropagation();
+      setOpen(false);
+    } else if (e.target.closest('.mobile-menu a')) {
+      setOpen(false);
+    }
+  }, true);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') setOpen(false);
+  });
+
+  window.addEventListener('resize', function () {
+    if (window.innerWidth >= 900) setOpen(false);
+  });
+
+  /* nav gets its background after scrolling */
+  function onScroll() {
+    if (nav) nav.classList.toggle('is-scrolled', window.scrollY > 20);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
 </body>
 </html>
