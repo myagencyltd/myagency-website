@@ -1677,3 +1677,108 @@ footer.site-footer {
   .hero__art .ring { animation: none; opacity: 0; }
   .motif--tr { animation: none; }
 }
+/* ==========================================================
+   Home hero: animated growth chart + faded shadow
+   ========================================================== */
+
+/* keep the hero text above the background shadow */
+.hero__grid { position: relative; z-index: 1; }
+
+/* faded shadow of the chart, in the brand colours */
+.hero-shadow {
+  position: absolute;
+  top: -10px;
+  right: -50px;
+  width: min(560px, 70vw);
+  height: auto;
+  opacity: .1;
+  pointer-events: none;
+  z-index: 0;
+  animation: haDrift 14s ease-in-out infinite;
+}
+@keyframes haDrift {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(-8px, 10px); }
+}
+
+/* main chart */
+.hero__art svg { width: 100%; height: auto; overflow: visible; }
+
+.ha-base {
+  stroke: #B9C4B9;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 380;
+  stroke-dashoffset: 380;
+  animation: haDraw .8s cubic-bezier(.65, .05, .2, 1) .1s forwards;
+}
+
+.ha-bar {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transform: scaleY(0);
+  animation: haGrow .9s cubic-bezier(.2, .7, .2, 1) forwards;
+}
+.ha-bar--1 { fill: #2E7D32; animation-delay: .3s; }
+.ha-bar--2 { fill: #1565C0; animation-delay: .55s; }
+.ha-bar--3 { fill: #D4AF37; animation-delay: .8s; }
+
+.ha-trend,
+.ha-arrow {
+  fill: none;
+  stroke: #14181A;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ha-trend {
+  stroke-dasharray: 340;
+  stroke-dashoffset: 340;
+  animation: haDraw 1s cubic-bezier(.65, .05, .2, 1) 1.3s forwards;
+}
+.ha-arrow {
+  opacity: 0;
+  animation: haFade .4s ease 2.2s forwards;
+}
+
+.ha-ring {
+  fill: none;
+  stroke: #D4AF37;
+  stroke-width: 2.5;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: haPulse 2.6s ease-out 2.5s infinite;
+}
+
+/* floating dots: fade in and bob (different properties, so no clash) */
+.ha-dot {
+  opacity: 0;
+  animation:
+    haFade .5s ease forwards,
+    haBob 5s ease-in-out infinite;
+}
+.ha-dot--1 { fill: #D4AF37; animation-delay: 1.0s, 1.0s; }
+.ha-dot--2 { fill: #1565C0; animation-delay: 1.2s, 1.2s; animation-duration: .5s, 6s; }
+.ha-dot--3 { fill: #2E7D32; animation-delay: 1.4s, 1.4s; animation-duration: .5s, 5.5s; }
+.ha-dot--4 { fill: #D4AF37; animation-delay: 1.6s, 1.6s; animation-duration: .5s, 6.5s; }
+
+@keyframes haDraw  { to { stroke-dashoffset: 0; } }
+@keyframes haGrow  { to { transform: scaleY(1); } }
+@keyframes haFade  { to { opacity: 1; } }
+@keyframes haBob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+@keyframes haPulse {
+  0%   { transform: scale(1);   opacity: .7; }
+  100% { transform: scale(2.8); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-shadow { animation: none; }
+  .ha-base, .ha-trend { animation: none; stroke-dashoffset: 0; }
+  .ha-bar { animation: none; transform: none; }
+  .ha-arrow, .ha-dot { animation: none; opacity: 1; }
+  .ha-ring { animation: none; opacity: 0; }
+}
