@@ -1782,3 +1782,18 @@ footer.site-footer {
   .ha-arrow, .ha-dot { animation: none; opacity: 1; }
   .ha-ring { animation: none; opacity: 0; }
 }
+/* bigger hero chart */
+.hero__art { min-height: 340px; }
+.hero__art svg {
+  width: 100%;
+  max-width: none;
+}
+
+@media (min-width: 900px) {
+  /* give the chart column more room and let the chart extend slightly past it */
+  .hero__grid { grid-template-columns: 1fr 1.1fr; }
+  .hero__art svg {
+    width: 112%;
+    margin-left: -4%;
+  }
+}
