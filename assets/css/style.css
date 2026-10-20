@@ -1797,3 +1797,18 @@ footer.site-footer {
     margin-left: -4%;
   }
 }
+.hero-shadow {
+  position: absolute;
+  top: -10px;
+  right: -40px;
+  width: 190px;
+  height: auto;
+  opacity: .08;
+  pointer-events: none;
+  z-index: 0;
+  animation: haDrift 14s ease-in-out infinite;
+}
+
+@media (max-width: 900px) {
+  .hero-shadow { width: 140px; right: -30px; top: -5px; }
+}
