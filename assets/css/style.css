@@ -1240,3 +1240,152 @@ footer.site-footer {
     opacity: 1;
   }
 }
+/* ---------- Services list: reveal + hover ---------- */
+.services-list .row {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* light green wipe that slides in from the left */
+.services-list .row::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #E8F3E8;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .5s cubic-bezier(.65, 0, .35, 1);
+  z-index: -1;
+}
+
+/* solid green accent bar on the left edge */
+.services-list .row::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #2E7D32;
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform .35s ease .1s;
+}
+
+.services-list .row > * {
+  transition: transform .4s ease, color .3s ease;
+}
+
+@media (hover: hover) {
+  .services-list .row:hover::before,
+  .services-list .row:focus-within::before { transform: scaleX(1); }
+
+  .services-list .row:hover::after,
+  .services-list .row:focus-within::after { transform: scaleY(1); }
+
+  .services-list .row:hover > div,
+  .services-list .row:focus-within > div { transform: translateX(10px); }
+
+  .services-list .row:hover .row__index,
+  .services-list .row:focus-within .row__index { color: #2E7D32; }
+
+  .services-list .row:hover .row__title,
+  .services-list .row:focus-within .row__title { color: #1B5E20; }
+}
+
+/* scroll reveal: staggered fade-up (only active when JS has run) */
+.services-list.reveal-ready .row {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.services-list.is-visible .row {
+  animation: row-in .7s cubic-bezier(.22, 1, .36, 1) both;
+  animation-delay: calc(var(--i) * .1s);
+}
+@keyframes row-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-list.reveal-ready .row { opacity: 1; transform: none; }
+  .services-list.is-visible .row { animation: none; }
+  .services-list .row::before,
+  .services-list .row::after,
+  .services-list .row > * { transition: none; }
+}/* ---------- Services list: reveal + hover ---------- */
+.services-list .row {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* light green wipe that slides in from the left */
+.services-list .row::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #E8F3E8;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .5s cubic-bezier(.65, 0, .35, 1);
+  z-index: -1;
+}
+
+/* solid green accent bar on the left edge */
+.services-list .row::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #2E7D32;
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform .35s ease .1s;
+}
+
+.services-list .row > * {
+  transition: transform .4s ease, color .3s ease;
+}
+
+@media (hover: hover) {
+  .services-list .row:hover::before,
+  .services-list .row:focus-within::before { transform: scaleX(1); }
+
+  .services-list .row:hover::after,
+  .services-list .row:focus-within::after { transform: scaleY(1); }
+
+  .services-list .row:hover > div,
+  .services-list .row:focus-within > div { transform: translateX(10px); }
+
+  .services-list .row:hover .row__index,
+  .services-list .row:focus-within .row__index { color: #2E7D32; }
+
+  .services-list .row:hover .row__title,
+  .services-list .row:focus-within .row__title { color: #1B5E20; }
+}
+
+/* scroll reveal: staggered fade-up (only active when JS has run) */
+.services-list.reveal-ready .row {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.services-list.is-visible .row {
+  animation: row-in .7s cubic-bezier(.22, 1, .36, 1) both;
+  animation-delay: calc(var(--i) * .1s);
+}
+@keyframes row-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-list.reveal-ready .row { opacity: 1; transform: none; }
+  .services-list.is-visible .row { animation: none; }
+  .services-list .row::before,
+  .services-list .row::after,
+  .services-list .row > * { transition: none; }
+}
