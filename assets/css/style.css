@@ -2014,27 +2014,3 @@ footer.site-footer {
   .cues--industries.is-visible .strip__item:hover,
   .who.is-visible .who__item:hover { transform: none; }
 }
-/* Photos: uncropped, slightly larger, capped so the layout holds */
-.photo--full {
-  --photo-w: 520px;          /* widest the photo can be */
-  --photo-h: 440px;          /* tallest the photo can be */
-
-  aspect-ratio: auto;
-  width: 100%;
-  max-width: var(--photo-w);
-  margin-inline: auto;       /* centred in its column */
-  align-self: center;
-  background: none;
-  border: none;
-}
-.photo--full img {
-  width: 100%;
-  height: auto;
-  max-height: var(--photo-h);
-  object-fit: contain;       /* whole photo shows, nothing cropped */
-}
-
-/* Phones: a little smaller so it doesn't dominate the screen */
-@media (max-width: 640px) {
-  .photo--full { --photo-h: 340px; }
-}
