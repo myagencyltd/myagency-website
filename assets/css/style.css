@@ -2051,3 +2051,26 @@ footer.site-footer {
   z-index: 2;
   pointer-events: none;
 }
+/* ===== Photo safety net: cropped, contained, layout-safe ===== */
+.split {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 860px) {
+  .split { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); }
+}
+
+.split > .photo {
+  width: 100%;
+  max-width: 480px;          /* biggest the photo can be */
+  justify-self: center;
+  align-self: center;
+  aspect-ratio: 4 / 3;       /* cropped frame, as before */
+  overflow: hidden;
+}
+.split > .photo > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  object-fit: cover;         /* crops instead of stretching */
+}
