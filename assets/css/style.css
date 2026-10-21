@@ -2014,3 +2014,12 @@ footer.site-footer {
   .cues--industries.is-visible .strip__item:hover,
   .who.is-visible .who__item:hover { transform: none; }
 }
+/* Full, uncropped photos */
+.photo--full {
+  aspect-ratio: auto;      /* frame takes the image's own shape */
+  align-self: center;      /* no stretched empty space beside the text */
+}
+.photo--full img {
+  height: auto;
+  object-fit: contain;
+}
