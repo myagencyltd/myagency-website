@@ -1088,11 +1088,15 @@ footer.site-footer {
     opacity: 0;
     transform: translateX(-28px);
     clip-path: inset(0 0 100% 0);
+    background-color: transparent;
+    box-shadow: inset 0 0 0 var(--c);
   }
   to {
     opacity: 1;
     transform: none;
     clip-path: inset(0 0 0 0);
+    background-color: var(--tint);
+    box-shadow: inset 6px 0 0 var(--c);
   }
 }
 
@@ -1129,22 +1133,18 @@ footer.site-footer {
 .cues--services.is-visible .row:nth-child(4) { animation-delay: .65s; }
 .cues--services.is-visible .row:nth-child(5) { animation-delay: .80s; }
 
-@keyframes svcFade {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: none; }
-}
-
-/* Rows rise in while the brand colour bar grows from nothing */
 @keyframes svcRow {
   from {
     opacity: 0;
     transform: translateY(26px);
+    background-color: transparent;
     box-shadow: inset 0 0 0 var(--c);
   }
   to {
     opacity: 1;
     transform: none;
-    box-shadow: inset 3px 0 0 var(--c);
+    background-color: var(--tint);
+    box-shadow: inset 6px 0 0 var(--c);
   }
 }
 
