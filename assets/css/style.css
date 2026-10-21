@@ -1908,3 +1908,68 @@ footer.site-footer {
 
 /* the X button in the nav replaces the menu's own close button */
 .mobile-menu__close { display: none; }
+/* ==========================================================
+   Cards show their hover colours as soon as the section scrolls in
+   ========================================================== */
+
+/* What we do */
+.cues--services.is-visible .row {
+  background-color: var(--tint);
+  box-shadow: inset 6px 0 0 var(--c);
+}
+.cues--services.is-visible .row .row__index,
+.cues--services.is-visible .row .row__title,
+.cues--services.is-visible .row .row__desc { color: #1A1A1A; }
+
+/* Industries we know: now animates in like the other two */
+.ind--anim:not(.is-visible) .eyebrow,
+.ind--anim:not(.is-visible) h2,
+.ind--anim:not(.is-visible) .strip__item { opacity: 0; }
+
+.cues--industries.is-visible .eyebrow { animation: svcFade .6s ease backwards; }
+.cues--industries.is-visible h2       { animation: svcFade .7s ease .08s backwards; }
+
+.cues--industries.is-visible .strip__item {
+  background-color: var(--tint);
+  box-shadow: inset 0 8px 0 var(--c);
+  animation: indIn .75s cubic-bezier(.2, .7, .2, 1) backwards;
+}
+.cues--industries.is-visible .strip__item:nth-child(1) { animation-delay: .20s; }
+.cues--industries.is-visible .strip__item:nth-child(2) { animation-delay: .35s; }
+.cues--industries.is-visible .strip__item:nth-child(3) { animation-delay: .50s; }
+.cues--industries.is-visible .strip__item:nth-child(4) { animation-delay: .65s; }
+
+.cues--industries.is-visible .strip__item h3,
+.cues--industries.is-visible .strip__item p { color: #1A1A1A; }
+
+/* keep the lift and drop shadow for real hovers */
+.cues--industries.is-visible .strip__item:hover {
+  box-shadow: inset 0 8px 0 var(--c), 0 12px 24px rgba(0, 0, 0, .08);
+}
+
+@keyframes indIn {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+    background-color: transparent;
+    box-shadow: inset 0 0 0 var(--c);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    background-color: var(--tint);
+    box-shadow: inset 0 8px 0 var(--c);
+  }
+}
+
+/* Who we are */
+.who.is-visible .who__item {
+  background-color: var(--tint);
+  box-shadow: inset 6px 0 0 var(--c);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cues--industries.is-visible .eyebrow,
+  .cues--industries.is-visible h2,
+  .cues--industries.is-visible .strip__item { animation: none; }
+}
