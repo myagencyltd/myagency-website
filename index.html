@@ -270,16 +270,22 @@
 
 <script>
 (function () {
-  // Skip the animation for people who prefer reduced motion
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  // Old browsers: just show everything
-  if (!('IntersectionObserver' in window)) return;
-
   var sections = [
-    { selector: '.who',            hideClass: 'who--anim' },
-    { selector: '.cues--services', hideClass: 'svc--anim' }
+    { selector: '.who',              hideClass: 'who--anim' },
+    { selector: '.cues--services',   hideClass: 'svc--anim' },
+    { selector: '.cues--industries', hideClass: 'ind--anim' }
   ];
+
+  function showAll() {
+    sections.forEach(function (s) {
+      var el = document.querySelector(s.selector);
+      if (el) el.classList.add('is-visible');
+    });
+  }
+
+  // No animation: reduced motion or old browser. Show the colours immediately.
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) { showAll(); return; }
 
   var observer = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
