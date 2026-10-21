@@ -1973,3 +1973,44 @@ footer.site-footer {
   .cues--industries.is-visible h2,
   .cues--industries.is-visible .strip__item { animation: none; }
 }
+/* ==========================================================
+   Minimal hover effect
+   Cards keep their colours; hovering adds a light touch.
+   ========================================================== */
+
+/* the text can slide a few px on the service rows */
+.cues--services .row > * { transition: transform .25s ease; }
+
+@media (hover: hover) {
+
+  /* What we do: bar widens, tint deepens, text nudges right */
+  .cues--services.is-visible .row:hover {
+    background-color: var(--tint);                               /* fallback */
+    background-color: color-mix(in srgb, var(--c) 28%, #fff);
+    box-shadow: inset 10px 0 0 var(--c);
+  }
+  .cues--services.is-visible .row:hover > * { transform: translateX(4px); }
+
+  /* Industries we know: soft lift and a faint shadow */
+  .cues--industries.is-visible .strip__item:hover {
+    background-color: var(--tint);
+    background-color: color-mix(in srgb, var(--c) 28%, #fff);
+    box-shadow: inset 0 8px 0 var(--c), 0 8px 18px rgba(0, 0, 0, .06);
+    transform: translateY(-3px);
+  }
+
+  /* Who we are: bar widens, small nudge right */
+  .who.is-visible .who__item:hover {
+    background-color: var(--tint);
+    background-color: color-mix(in srgb, var(--c) 28%, #fff);
+    box-shadow: inset 9px 0 0 var(--c);
+    transform: translateX(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cues--services .row > * { transition: none; }
+  .cues--services.is-visible .row:hover > *,
+  .cues--industries.is-visible .strip__item:hover,
+  .who.is-visible .who__item:hover { transform: none; }
+}
